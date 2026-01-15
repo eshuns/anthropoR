@@ -1,0 +1,17 @@
+Package: anthropoR
+Title: Anthropometric Tools in R
+Version: 0.0.1
+Authors@R: 
+    person("Solomon", "Eshun", , "eshuns@unc.edu", role = c("aut", "cre"))
+Author: Solomon Eshun [aut, cre]
+Maintainer: Solomon Eshun <eshuns@unc.edu>
+Description: Compute BMI and classify obesity for adults and children.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+Imports:
+    pedbp
