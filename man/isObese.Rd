@@ -13,7 +13,7 @@ isObese(
   inches = NULL,
   height_m = NULL,
   height_in = NULL,
-  sex,
+  sex = NULL,
   age_years = NULL,
   age_months = NULL,
   out_name = "obese"
@@ -81,4 +81,11 @@ df3 <- data.frame(
 )
 isObese(df3, sex = "sex", age_years = "age_years",
         weight_lb = "weight_lb", height_in = "height_in")
+
+# Example 4: Adults only, BMI column provided (no sex/age needed)
+df4 <- data.frame(
+  id = 1:3,
+  bmi = c(22, 31, 28)
+)
+isObese(df4, bmi = "bmi")
 }

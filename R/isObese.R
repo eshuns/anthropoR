@@ -47,6 +47,13 @@
 #' )
 #' isObese(df3, sex = "sex", age_years = "age_years",
 #'         weight_lb = "weight_lb", height_in = "height_in")
+#'
+#' # Example 4: Adults only, BMI column provided (no sex/age needed)
+#' df4 <- data.frame(
+#'   id = 1:3,
+#'   bmi = c(22, 31, 28)
+#' )
+#' isObese(df4, bmi = "bmi")
 isObese <- function(df,
                     bmi = NULL,
                     weight_lb = NULL,
@@ -55,7 +62,7 @@ isObese <- function(df,
                     inches = NULL,
                     height_m = NULL,
                     height_in = NULL,
-                    sex,
+                    sex = NULL,
                     age_years = NULL,
                     age_months = NULL,
                     out_name = "obese") {
@@ -88,7 +95,7 @@ isObese <- function(df,
   age_months_calc <- ifelse(is.na(age_m) & !is.na(age_y), age_y * 12, age_m)
   
   # ---- Prepare sex ----
-  male <- as.numeric(df2[[sex]])
+  male <- if (!is.null(sex)) as.numeric(df2[[sex]]) else rep(NA_real_, nrow(df2))
   
   # ---- CDC eligibility for children ----
   cdc_ok <- !is.na(df2[[bmi]]) & !is.na(age_months_calc) & !is.na(male) &
@@ -110,9 +117,12 @@ isObese <- function(df,
   }
   
   # ---- Adult vs child classification ----
-  adult_idx <- which(!is.na(df2[[bmi]]) & !is.na(age_years_calc) & age_years_calc >= 20)
+  # Adults: BMI available, age >=20 OR age missing
+  adult_idx <- which(!is.na(df2[[bmi]]) & (is.null(age_years) | age_years_calc >= 20))
+  # Children: CDC eligible
   child_idx <- which(cdc_ok & !is.na(df2[[bmi]]))
   
+  # Assign obesity
   df2[[out_name]][adult_idx] <- ifelse(df2[[bmi]][adult_idx] >= 30, 1, 0)
   df2[[out_name]][child_idx] <- ifelse(cdc_pct[child_idx] >= 95, 1, 0)
   
