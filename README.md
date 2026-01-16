@@ -56,7 +56,3 @@ df[, c("id","age_years","bmi","obese")]
 ## Contributing
 
 Contributions are welcome! Please open an issue or submit a pull request on GitHub.
-
-## License
-
-This package is licensed under the MIT License.
