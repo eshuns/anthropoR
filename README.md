@@ -1,6 +1,6 @@
 # anthropoR
 
-`anthropoR` is an R package for calculating **Body Mass Index (BMI)** and classifying **obesity** for adults and children. It handles multiple height and weight formats and automatically computes BMI if not provided.
+`anthropoR` is a light R package for calculating **Body Mass Index (BMI)** and classifying **obesity** for adults and children. It handles multiple height and weight formats and automatically computes BMI if not provided.
 
 ## Installation
 
